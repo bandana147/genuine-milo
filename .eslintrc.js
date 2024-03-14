@@ -32,6 +32,6 @@ module.exports = {
     'chai-friendly',
   ],
   ignorePatterns: [
-    '/creativecloud/deps/*',
+    '/genuine/deps/*',
   ],
 };

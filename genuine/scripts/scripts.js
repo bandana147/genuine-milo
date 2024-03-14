@@ -10,10 +10,10 @@
  * governing permissions and limitations under the License.
  */
 
-import { setLibs, decorateArea } from './utils.js';
+import { setLibs, validateUser } from './utils.js';
 
 // Add project-wide style path here.
-const STYLES = '/creativecloud/styles/styles.css';
+const STYLES = '/genuine/styles/styles.css';
 
 // Use '/libs' if your live site maps '/libs' to milo's origin.
 const LIBS = '/libs';
@@ -120,16 +120,34 @@ const locales = {
   cis_en: { ietf: 'en', tk: 'pps7abe.css' },
 };
 
+function getParamsPlaceholders () {
+  const urlParams = new URLSearchParams(window.location.search);
+  const gtoken = urlParams.get('gtoken');
+  const gid = urlParams.get('gid');
+  return {
+    gid,
+    gtoken,
+  }
+}
+
+function passParams(button) {
+  const urlParams = new URLSearchParams(window.location.search);
+  const gtoken = urlParams.get('gtoken');
+  const gid = urlParams.get('gid');
+  button.href = `${button.href}?gtoken=${gtoken}&gid=${gid}`
+}
+
 // Add any config options.
 const CONFIG = {
   contentRoot: '/cc-shared',
-  codeRoot: '/creativecloud',
+  codeRoot: '/genuine',
   imsClientId: 'adobedotcom-cc',
   locales,
+  button: { passParams },
   geoRouting: 'on',
   prodDomains: ['www.adobe.com', 'helpx.adobe.com', 'business.adobe.com'],
   queryIndexCardPath: '/cc-shared/assets/query-index-cards',
-  decorateArea,
+  placeholders: getParamsPlaceholders(),
   stage: {
     marTechUrl: 'https://assets.adobedtm.com/d4d114c60e50/a0e989131fd5/launch-2c94beadc94f-development.min.js',
     edgeConfigId: '8d2805dd-85bf-4748-82eb-f99fdad117a6',
@@ -166,7 +184,7 @@ const CONFIG = {
 const miloLibs = setLibs(LIBS);
 const { loadArea, setConfig, loadLana } = await import(`${miloLibs}/utils/utils.js`);
 setConfig({ ...CONFIG, miloLibs });
-decorateArea();
+validateUser();
 
 (function loadStyles() {
   const paths = [`${miloLibs}/styles/styles.css`];
@@ -180,6 +198,11 @@ decorateArea();
 }());
 
 (async function loadPage() {
-  loadLana({ clientId: 'cc' });
-  await loadArea();
+  const isValid = await validateUser();
+  if (isValid) {
+    loadLana({ clientId: 'cc' });
+    await loadArea();
+  } else {
+    window.location.href = 'https://www.adobe.com/creativecloud.html';
+  }
 }());

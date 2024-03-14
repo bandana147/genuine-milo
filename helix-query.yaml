@@ -9,7 +9,7 @@ indices:
       - '**/drafts/**'
       - '**/fragments/**'
     include:
-      - /creativecloud/**
+      - /genuine/**
       - /products/**
     target: /cc-shared/assets/query-index.xlsx
     properties:
@@ -59,7 +59,7 @@ indices:
   creativecloud-au:
     <<: *def
     include:
-      - /au/creativecloud/**
+      - /au/genuine/**
       - /au/products/**
     target: /au/cc-shared/assets/query-index.xlsx
   

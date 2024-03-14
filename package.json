@@ -11,7 +11,7 @@
     "lcov": "lcov -a coverage/jest/lcov.info -a coverage/wtr/lcov.info -o coverage/lcov.info",
     "lint": "npm run lint:js && npm run lint:css",
     "lint:js": "eslint .",
-    "lint:css": "stylelint 'creativecloud/blocks/**/*.css' 'creativecloud/styles/*.css'"
+    "lint:css": "stylelint 'genuine/blocks/**/*.css' 'genuine/styles/*.css'"
   },
   "repository": {
     "type": "git",
