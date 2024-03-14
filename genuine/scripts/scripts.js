@@ -184,7 +184,6 @@ const CONFIG = {
 const miloLibs = setLibs(LIBS);
 const { loadArea, setConfig, loadLana } = await import(`${miloLibs}/utils/utils.js`);
 setConfig({ ...CONFIG, miloLibs });
-validateUser();
 
 (function loadStyles() {
   const paths = [`${miloLibs}/styles/styles.css`];
@@ -203,6 +202,6 @@ validateUser();
     loadLana({ clientId: 'cc' });
     await loadArea();
   } else {
-    window.location.href = 'https://www.adobe.com/creativecloud.html';
+    window.location.href = 'https://www.adobe.com/genuine.html';
   }
 }());
