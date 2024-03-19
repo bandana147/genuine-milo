@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import { setLibs, validateUser } from './utils.js';
+import { setLibs, validateUser, decorateArea } from './utils.js';
 
 // Add project-wide style path here.
 const STYLES = '/genuine/styles/styles.css';
@@ -185,6 +185,11 @@ const miloLibs = setLibs(LIBS);
 const { loadArea, setConfig, loadLana } = await import(`${miloLibs}/utils/utils.js`);
 setConfig({ ...CONFIG, miloLibs });
 
+function decorateButton() {
+  const buttons = document.querySelectorAll('a, .con-button');
+  buttons.forEach(button => passParams(button))
+}
+
 (function loadStyles() {
   const paths = [`${miloLibs}/styles/styles.css`];
   if (STYLES) { paths.push(STYLES); }
@@ -201,6 +206,7 @@ setConfig({ ...CONFIG, miloLibs });
   if (isValid) {
     loadLana({ clientId: 'cc' });
     await loadArea();
+    decorateButton();
   } else {
     window.location.href = 'https://www.adobe.com/genuine.html';
   }

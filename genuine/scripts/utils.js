@@ -60,3 +60,12 @@ export function validateUser() {
   });
   return response;
 }
+
+function getDecorateAreaFn() {
+  return (area, options) => {
+    console.log(area, options)
+    debugger
+  };
+}
+
+export const decorateArea = getDecorateAreaFn();
