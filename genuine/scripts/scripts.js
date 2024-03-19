@@ -189,9 +189,10 @@ function decorateButton() {
     loadLana({ clientId: 'cc' });
     await loadArea();
     decorateButton();
-    const t = await getConfig();
-    console.log(t)
   } else {
-    window.location.href = 'https://www.adobe.com/genuine.html';
+    const configs = await getConfig();
+    const defaultPage = configs[11];
+    console.log(defaultPage)
+    window.location.href = defaultPage
   }
 }());

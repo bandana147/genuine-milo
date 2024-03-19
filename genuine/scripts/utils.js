@@ -89,13 +89,13 @@ export function passParams(button) {
 }
 
 export async function getConfig() {
-  let resp = {};
+  let configs = {};
   try {
-    resp = await fetch(`${origin}${DOT_MILO}`);
+    const resp = await fetch(`${origin}${DOT_MILO}`);
     const json = await resp.json();
-    console.log(json, 'pplplpl')
+    configs = json.configs?.data;
   } catch(err) {
     console.log(err, 'error')
   }
-
+  return configs;
 }
