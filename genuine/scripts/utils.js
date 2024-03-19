@@ -89,7 +89,7 @@ export function passParams(button) {
 }
 
 export async function getConfig() {
-  const resp = {};
+  let resp = {};
   try {
     resp = await fetch(`${origin}${DOT_MILO}`);
     const json = await resp.json();
