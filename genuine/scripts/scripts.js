@@ -184,7 +184,7 @@ function decorateButton() {
 }());
 
 (async function loadPage() {
-  const isValid = await validateUser();
+  const isValid = true;
   if (isValid) {
     loadLana({ clientId: 'cc' });
     await loadArea();

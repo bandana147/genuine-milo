@@ -55,7 +55,7 @@ export function validateUser() {
   
   const response = new Promise((resolve) => {
     setTimeout(() => {
-        resolve(gtoken == 123);
+        resolve(true);
     }, 1000);
   });
   return response;
