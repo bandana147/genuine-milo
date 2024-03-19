@@ -61,11 +61,19 @@ export function validateUser() {
   return response;
 }
 
-function getDecorateAreaFn() {
-  return (area, options) => {
-    console.log(area, options)
-    debugger
-  };
+export function getParamsPlaceholders () {
+  const urlParams = new URLSearchParams(window.location.search);
+  const gtoken = urlParams.get('gtoken');
+  const gid = urlParams.get('gid');
+  return {
+    gid,
+    gtoken,
+  }
 }
 
-export const decorateArea = getDecorateAreaFn();
+export function passParams(button) {
+  const urlParams = new URLSearchParams(window.location.search);
+  const gtoken = urlParams.get('gtoken');
+  const gid = urlParams.get('gid');
+  button.href = `${button.href}?gtoken=${gtoken}&gid=${gid}`
+}

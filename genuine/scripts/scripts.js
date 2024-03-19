@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import { setLibs, validateUser, decorateArea } from './utils.js';
+import { setLibs, validateUser, passParams, getParamsPlaceholders } from './utils.js';
 
 // Add project-wide style path here.
 const STYLES = '/genuine/styles/styles.css';
@@ -120,30 +120,12 @@ const locales = {
   cis_en: { ietf: 'en', tk: 'pps7abe.css' },
 };
 
-function getParamsPlaceholders () {
-  const urlParams = new URLSearchParams(window.location.search);
-  const gtoken = urlParams.get('gtoken');
-  const gid = urlParams.get('gid');
-  return {
-    gid,
-    gtoken,
-  }
-}
-
-function passParams(button) {
-  const urlParams = new URLSearchParams(window.location.search);
-  const gtoken = urlParams.get('gtoken');
-  const gid = urlParams.get('gid');
-  button.href = `${button.href}?gtoken=${gtoken}&gid=${gid}`
-}
-
 // Add any config options.
 const CONFIG = {
   contentRoot: '/cc-shared',
   codeRoot: '/genuine',
   imsClientId: 'adobedotcom-cc',
   locales,
-  button: { passParams },
   geoRouting: 'on',
   prodDomains: ['www.adobe.com', 'helpx.adobe.com', 'business.adobe.com'],
   queryIndexCardPath: '/cc-shared/assets/query-index-cards',
@@ -154,21 +136,21 @@ const CONFIG = {
     pdfViewerClientId: '9f7f19a46bd542e2b8548411e51eb4d4',
     pdfViewerReportSuite: 'adbadobenonacdcqa',
   },
-  live: {
-    pdfViewerClientId: 'a26c77a2effb4c4aaa71e7c46385e0ed',
-    pdfViewerReportSuite: 'adbadobenonacdcqa',
-  },
-  prod: {
-    marTechUrl: 'https://assets.adobedtm.com/d4d114c60e50/a0e989131fd5/launch-5dd5dd2177e6.min.js',
-    edgeConfigId: '2cba807b-7430-41ae-9aac-db2b0da742d5',
-    pdfViewerClientId: '409019ebd2d546c0be1a0b5a61fe65df',
-    pdfViewerReportSuite: 'adbadobenonacdcprod',
-  },
-  jarvis: {
-    id: 'adobedotcom2',
-    version: '1.83',
-    onDemand: false,
-  },
+  // live: {
+  //   pdfViewerClientId: 'a26c77a2effb4c4aaa71e7c46385e0ed',
+  //   pdfViewerReportSuite: 'adbadobenonacdcqa',
+  // },
+  // prod: {
+  //   marTechUrl: 'https://assets.adobedtm.com/d4d114c60e50/a0e989131fd5/launch-5dd5dd2177e6.min.js',
+  //   edgeConfigId: '2cba807b-7430-41ae-9aac-db2b0da742d5',
+  //   pdfViewerClientId: '409019ebd2d546c0be1a0b5a61fe65df',
+  //   pdfViewerReportSuite: 'adbadobenonacdcprod',
+  // },
+  // jarvis: {
+  //   id: 'adobedotcom2',
+  //   version: '1.83',
+  //   onDemand: false,
+  // },
   htmlExclude: [
     /www\.adobe\.com\/(\w\w(_\w\w)?\/)?express(\/.*)?/,
     /www\.adobe\.com\/(\w\w(_\w\w)?\/)?go(\/.*)?/,
