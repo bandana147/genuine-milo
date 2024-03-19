@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import { setLibs, validateUser, passParams, getParamsPlaceholders } from './utils.js';
+import { setLibs, validateUser, passParams, getParamsPlaceholders, getConfig } from './utils.js';
 
 // Add project-wide style path here.
 const STYLES = '/genuine/styles/styles.css';
@@ -189,6 +189,8 @@ function decorateButton() {
     loadLana({ clientId: 'cc' });
     await loadArea();
     decorateButton();
+    const t = await getConfig();
+    console.log(t)
   } else {
     window.location.href = 'https://www.adobe.com/genuine.html';
   }

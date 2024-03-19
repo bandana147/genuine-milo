@@ -19,6 +19,16 @@
 /**
  * The decision engine for where to get Milo's libs from.
  */
+
+const DOT_MILO = '/.milo/config.json';
+
+const urlParams = new URLSearchParams(window.location.search);
+const owner = urlParams.get('owner') || 'adobecom';
+const repo = urlParams.get('repo') || 'milo';
+export const origin = `https://main--${repo}--${owner}.hlx.page`;
+
+
+
 export const [setLibs, getLibs] = (() => {
   let libs;
   return [
@@ -76,4 +86,16 @@ export function passParams(button) {
   const gtoken = urlParams.get('gtoken');
   const gid = urlParams.get('gid');
   button.href = `${button.href}?gtoken=${gtoken}&gid=${gid}`
+}
+
+export async function getConfig() {
+  const resp = {};
+  try {
+    resp = await fetch(`${origin}${DOT_MILO}`);
+    const json = await resp.json();
+    console.log(json, 'pplplpl')
+  } catch(err) {
+    console.log(err, 'error')
+  }
+
 }
